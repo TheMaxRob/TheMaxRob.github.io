@@ -1,44 +1,60 @@
-import Image from 'next/image';
+// /app/components/ProjectCard.tsx
 
-const ProjectCard = () => {
-   return (
-        <main className="container mx-auto px-4 pb-10">
-        <section className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
-            <Image
-            src="/project-thumbnail.jpg" 
-            alt="Project Title"
-            width={400}
-            height={250}
-            className="rounded"
-            />
-            <h2 className="mt-4 text-xl font-semibold">Project Title</h2>
-            <p className="mt-2 text-sm">
-            A brief description of your project. Explain what it is, the technologies used, and what makes it unique.
-            </p>
-            <div className="mt-4 flex space-x-4">
-            <a
-                href="#"
-                className="text-blue-500 hover:underline text-sm"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                View Project
-            </a>
-            <a
-                href="#"
-                className="text-blue-500 hover:underline text-sm"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                GitHub
-            </a>
-            </div>
-        </div>
-        {/* Repeat similar project cards for your other projects */}
-        </section>
-        </main>
-   )
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import type { Project } from "../types/types"; // Adjust path as needed
+
+interface ProjectCardProps {
+  project: Project;
 }
+
+const ProjectCard = ({ project }: ProjectCardProps) => {
+  return (
+    <Link href={project.pageLink ?? "#"}>
+      <div className="cursor-pointer bg-white dark:bg-gray-800 p-6 rounded-lg shadow transition-shadow hover:shadow-lg flex flex-row items-start space-x-6 hover:bg-gray-100 dark:hover:bg-gray-700">
+        {/* Optionally display an image if you want; remove this if not needed */}
+        {/* 
+        <div className="flex-shrink-0">
+          <Image
+            src="/project-thumbnail.jpg"
+            alt={project.title}
+            width={180}
+            height={120}
+            className="rounded"
+          />
+        </div>
+        */}
+
+        <div className="flex flex-col">
+          <h2 className="text-4xl font-extrabold text-left">{project.title}</h2>
+
+          {/* Optionally display end_date if set */}
+          {project.end_date && (
+            <p className="text-sm text-gray-500">
+              {project.end_date.toLocaleDateString("en-US", { month: "short", year: "numeric" })}
+            </p>
+          )}
+
+          <p className="mt-2 text-sm">{project.description}</p>
+
+          {/* Render tags as small chips */}
+          {project.tags?.length > 0 && (
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {project.tags.map((tag, index) => (
+                <li
+                  key={index}
+                  className="bg-gray-200 dark:bg-gray-700 text-xs px-2 py-1 rounded-full"
+                >
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    </Link>
+  );
+};
 
 export default ProjectCard;

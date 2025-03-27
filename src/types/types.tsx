@@ -1,8 +1,27 @@
+// /app/types/types.ts
+
 export interface Project {
-    title: string;
-    slug: string;
-    start_date: Date;
-    end_date: Date | null;
-    tags: string[];
-    content: string;
-  }
+  title: string;
+  description: string;
+  end_date: Date | null;
+  link: string;    
+  pageLink: string;   
+  tags: string[];
+  content: string; 
+}
+
+export interface ProfExperience {
+  company: string;
+  role: string;
+  startDate: Date;
+  endDate?: Date | null;
+  pageLink: string;
+}
+
+export interface Extracurricular {
+  name: string;
+  role: string;
+  startDate: Date;
+  endDate?: Date | null;
+  description?: string;
+}
