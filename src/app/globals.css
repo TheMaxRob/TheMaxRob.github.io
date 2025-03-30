@@ -38,3 +38,8 @@ body {
 .animate-fadeIn {
   animation: fadeIn 1s ease-out forwards;
 }
+
+
+html {
+  scroll-behavior: smooth;
+}
