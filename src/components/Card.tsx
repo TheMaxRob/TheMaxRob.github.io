@@ -1,6 +1,8 @@
 import React from 'react';
 import SkillBubble from './SkillBubble';
 
+
+
 interface CardProps {
   name: string;
   link: string;

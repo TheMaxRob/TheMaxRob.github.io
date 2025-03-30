@@ -1,5 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Card from './Card';
+
+enum CardType {
+  Project = 'Project',
+  Experience = 'Experience',
+  Involvement = 'Involvement'
+}
 
 interface CardData {
   id: number;
@@ -8,10 +14,18 @@ interface CardData {
   image?: string;
   description: string;
   skills: string[];
+  type: CardType;
 }
 
 const App: React.FC = () => {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<string>('about');
+
+  // Refs for sections
+  const aboutRef = useRef<HTMLElement>(null);
+  const experienceRef = useRef<HTMLElement>(null);
+  const projectsRef = useRef<HTMLElement>(null);
+  const involvementRef = useRef<HTMLElement>(null);
 
   const cardsData: CardData[] = [
     // Personal Projects
@@ -21,7 +35,8 @@ const App: React.FC = () => {
       link: "https://github.com/ShaneBerhoff/geoChat",
       image: "https://via.placeholder.com/150",
       description: "Built a full-stack, anonymous live chat app using React, NodeJS, MongoDB, Docker, AWS, and Socket.io. Achieved 99 unique users, 1000+ messages, and 600+ sessions using OSM geofencing data (87 zones).",
-      skills: ["React", "NodeJS", "MongoDB", "Docker", "AWS", "Socket.io"]
+      skills: ["React", "NodeJS", "MongoDB", "Docker", "AWS", "Socket.io"],
+      type: CardType.Project
     },
     {
       id: 2,
@@ -29,7 +44,8 @@ const App: React.FC = () => {
       link: "https://github.com/TheMaxRob/Solo",
       image: "https://via.placeholder.com/150",
       description: "Implemented a globe-based navigation system with SwiftUI and MapKit to display events. Utilized Firebase for real-time data syncing, authentication, and caching.",
-      skills: ["SwiftUI", "MapKit", "Firebase"]
+      skills: ["SwiftUI", "MapKit", "Firebase"],
+      type: CardType.Project
     },
     {
       id: 3,
@@ -37,7 +53,8 @@ const App: React.FC = () => {
       link: "https://github.com/emory-worldline/worldline",
       image: "https://via.placeholder.com/150",
       description: "Developed a data visualizer for photo library metadata using React Native, Expo, and Mapbox. Created custom animations and managed dynamic data clusters.",
-      skills: ["React Native", "Expo", "Mapbox"]
+      skills: ["React Native", "Expo", "Mapbox"],
+      type: CardType.Project
     },
     {
       id: 4,
@@ -45,7 +62,8 @@ const App: React.FC = () => {
       link: "https://github.com/TheMaxRob/Venmo-Receipt-Scanner",
       image: "https://via.placeholder.com/150",
       description: "A full-stack app that parses receipt items using React Native, Python/Flask, Pytesseract, and OpenCV. Integrates with the Venmo API for automated transactions.",
-      skills: ["React Native", "Python", "Flask", "Pytesseract", "OpenCV"]
+      skills: ["React Native", "Python", "Flask", "Pytesseract", "OpenCV"],
+      type: CardType.Project
     },
     {
       id: 5,
@@ -53,7 +71,8 @@ const App: React.FC = () => {
       link: "https://github.com/TheMaxRob/RpiFaceDetector",
       image: "https://via.placeholder.com/150",
       description: "An in-progress facial recognition system using C++ and OpenCV on a Raspberry Pi. Designed to differentiate friends in real time with a Pi Camera.",
-      skills: ["C++", "OpenCV", "Raspberry Pi"]
+      skills: ["C++", "OpenCV", "Raspberry Pi"],
+      type: CardType.Project
     },
     // Professional Experience
     {
@@ -62,7 +81,8 @@ const App: React.FC = () => {
       link: "https://example.com/ncent-holdings",
       image: "https://via.placeholder.com/150",
       description: "Serving as a Full-Stack Engineer Intern since 10/2024, developing the nCent platform with React and Node.js. Built the database system to enable users to monetize their personal data using Agile workflows and Jira.",
-      skills: ["React", "Node.js", "Agile", "Jira"]
+      skills: ["React", "Node.js", "Agile", "Jira"],
+      type: CardType.Experience
     },
     {
       id: 7,
@@ -70,7 +90,8 @@ const App: React.FC = () => {
       link: "https://www.emory.edu",
       image: "https://via.placeholder.com/150",
       description: "Conducting research on creating programmable IoT ecosystems with simultaneous RFID Tag Readers. Based in Atlanta, GA since 09/2024.",
-      skills: ["IoT", "RFID", "Research"]
+      skills: ["IoT", "RFID", "Research"],
+      type: CardType.Experience
     },
     {
       id: 8,
@@ -78,7 +99,8 @@ const App: React.FC = () => {
       link: "https://example.com/guardian-owl-digital",
       image: "https://via.placeholder.com/150",
       description: "Worked as a Development Intern from 06/2024 to 08/2024, managing blog content, optimizing SEO, and creating a GPT model for advertising and website audits while collaborating with clients on marketing strategies.",
-      skills: ["SEO", "GPT", "Marketing"]
+      skills: ["SEO", "GPT", "Marketing"],
+      type: CardType.Experience
     },
     // Community Involvement
     {
@@ -87,7 +109,8 @@ const App: React.FC = () => {
       link: "https://example.com/emory-impact-investing",
       image: "https://via.placeholder.com/150",
       description: "Managed a $250,000 investment fund to provide microloans and pro-bono consulting to entrepreneurs in Atlanta. Served from 01/2023 to 09/2024.",
-      skills: ["Investment", "Consulting", "Finance"]
+      skills: ["Investment", "Consulting", "Finance"],
+      type: CardType.Involvement
     },
     {
       id: 10,
@@ -95,7 +118,8 @@ const App: React.FC = () => {
       link: "https://example.com/emory-rock-climbing",
       image: "https://via.placeholder.com/150",
       description: "Active member of the Emory Rock Climbing Team from 08/2023 to 12/2024, promoting teamwork, physical endurance, and outdoor activity.",
-      skills: ["Teamwork", "Fitness", "Climbing"]
+      skills: ["Teamwork", "Fitness", "Climbing"],
+      type: CardType.Involvement
     },
     {
       id: 11,
@@ -103,9 +127,50 @@ const App: React.FC = () => {
       link: "https://example.com/kae",
       image: "https://via.placeholder.com/150",
       description: "Leading philanthropy and fundraising efforts since 10/2024, organizing community service and charity events for Kappa Alpha Epsilon.",
-      skills: ["Philanthropy", "Fundraising", "Leadership"]
+      skills: ["Philanthropy", "Fundraising", "Leadership"],
+      type: CardType.Involvement
     }
   ];
+
+  // Set up IntersectionObserver to track the active section
+  useEffect(() => {
+    const sections = [
+      { id: 'about', ref: aboutRef },
+      { id: 'experience', ref: experienceRef },
+      { id: 'projects', ref: projectsRef },
+      { id: 'involvement', ref: involvementRef }
+    ];
+
+    const observerOptions = {
+      root: null,
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          console.log(entry.target.id, entry.isIntersecting, entry.intersectionRatio);
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      }, observerOptions);
+      
+
+    sections.forEach((section) => {
+      if (section.ref.current) {
+        observer.observe(section.ref.current);
+      }
+    });
+
+    // Cleanup
+    return () => {
+      sections.forEach((section) => {
+        if (section.ref.current) {
+          observer.unobserve(section.ref.current);
+        }
+      });
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -122,12 +187,7 @@ const App: React.FC = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M16 12H8m8 0l-8 8m8-8l-8-8"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12H8m8 0l-8 8m8-8l-8-8" />
             </svg>
           </a>
           {/* Resume Icon */}
@@ -139,12 +199,7 @@ const App: React.FC = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M7 7h10M7 11h10m-7 4h7"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h10M7 11h10m-7 4h7" />
             </svg>
           </a>
           {/* GitHub Icon */}
@@ -184,63 +239,90 @@ const App: React.FC = () => {
 
       {/* Right Column: Cards & Nav */}
       <div className="ml-[50%] w-1/2 p-6 overflow-y-auto h-screen scroll-smooth">
-  {/* Navigation Bar */}
-  <nav className="mb-6 flex justify-center">
-    <div className="flex space-x-4">
-      <button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="px-3 py-1 hover:bg-gray-200 rounded">
-        About
-      </button>
-      <button onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })} className="px-3 py-1 hover:bg-gray-200 rounded">
-        Experience
-      </button>
-      <button onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })} className="px-3 py-1 hover:bg-gray-200 rounded">
-        Projects
-      </button>
-      <button onClick={() => document.getElementById('involvement')?.scrollIntoView({ behavior: 'smooth' })} className="px-3 py-1 hover:bg-gray-200 rounded">
-        Involvement
-      </button>
-    </div>
-  </nav>
+        {/* Sticky Navigation Bar */}
+        <nav className="sticky top-0 bg-transparent mb-6 flex justify-center z-10">
+          <div className="flex space-x-4">
+            <button
+              onClick={() => {
+                document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+                setActiveSection("about");
+              }
+            }
+              className={`px-3 py-1 rounded ${activeSection === 'about' ? 'underline' : 'hover:bg-gray-200'}`}
+            >
+              About
+            </button>
+            <button
+              onClick={() => {
+                document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' });
+                setActiveSection("experience");
+              }
+            }
+              className={`px-3 py-1 rounded ${activeSection === 'experience' ? 'underline' : 'hover:bg-gray-200'}`}
+            >
+              Experience
+            </button>
+            <button
+              onClick={() => {
+                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                setActiveSection("projects");
+              }
+            }
+              className={`px-3 py-1 rounded ${activeSection === 'projects' ? 'underline' : 'hover:bg-gray-200'}`}
+            >
+              Projects
+            </button>
+            <button
+              onClick={() => {
+                document.getElementById('involvement')?.scrollIntoView({ behavior: 'smooth' });
+                setActiveSection("involvement");
+              }
+            }
+              className={`px-3 py-1 rounded ${activeSection === 'involvement' ? 'underline' : 'hover:bg-gray-200'}`}
+            >
+              Involvement
+            </button>
+          </div>
+        </nav>
 
-  {/* About Section */}
-  <section id="about" className="mb-10">
-    <h2 className="text-2xl font-semibold mb-2">About Me</h2>
-    <p className="text-gray-700">
-      I'm Max Roberts, a computer science student at Emory University passionate about building full-stack software that blends engaging user experiences with powerful backend infrastructure. From geofenced chat apps to interactive map visualizations and embedded systems, I love bringing ideas to life across platforms.
-    </p>
-  </section>
+        {/* About Section */}
+        <section id="about" ref={aboutRef} className="mb-10">
+          <h2 className="text-2xl font-semibold mb-2">About Me</h2>
+          <p className="text-gray-700">
+            I'm Max Roberts, a computer science student at Emory University passionate about building full-stack software that blends engaging user experiences with powerful backend infrastructure. From geofenced chat apps to interactive map visualizations and embedded systems, I love bringing ideas to life across platforms.
+          </p>
+        </section>
 
-  {/* Experience Section */}
-  <section id="experience" className="mb-10">
-    <h2 className="text-2xl font-semibold mb-4">Experience</h2>
-    {cardsData
-      .filter(card => card.name.includes("Intern") || card.name.includes("Research"))
-      .map(card => (
-        <Card key={card.id} {...card} selectedSkill={selectedSkill} onSelectSkill={setSelectedSkill} />
-      ))}
-  </section>
+        {/* Experience Section */}
+        <section id="experience" ref={experienceRef} className="mb-10">
+          <h2 className="text-2xl font-semibold mb-4">Experience</h2>
+          {cardsData
+            .filter(card => card.type === CardType.Experience)
+            .map(card => (
+              <Card key={card.id} {...card} selectedSkill={selectedSkill} onSelectSkill={setSelectedSkill} />
+            ))}
+        </section>
 
-  {/* Projects Section */}
-  <section id="projects" className="mb-10">
-    <h2 className="text-2xl font-semibold mb-4">Projects</h2>
-    {cardsData
-      .filter(card => card.name !== undefined && !card.name.includes("Intern") && !card.name.includes("Research") && !card.name.includes("Emory"))
-      .map(card => (
-        <Card key={card.id} {...card} selectedSkill={selectedSkill} onSelectSkill={setSelectedSkill} />
-      ))}
-  </section>
+        {/* Projects Section */}
+        <section id="projects" ref={projectsRef} className="mb-10">
+          <h2 className="text-2xl font-semibold mb-4">Projects</h2>
+          {cardsData
+            .filter(card => card.type === CardType.Project)
+            .map(card => (
+              <Card key={card.id} {...card} selectedSkill={selectedSkill} onSelectSkill={setSelectedSkill} />
+            ))}
+        </section>
 
-  {/* Involvement Section */}
-  <section id="involvement" className="mb-10">
-    <h2 className="text-2xl font-semibold mb-4">Involvement</h2>
-    {cardsData
-      .filter(card => card.name.includes("Emory"))
-      .map(card => (
-        <Card key={card.id} {...card} selectedSkill={selectedSkill} onSelectSkill={setSelectedSkill} />
-      ))}
-  </section>
-</div>
-
+        {/* Involvement Section */}
+        <section id="involvement" ref={involvementRef} className="mb-10">
+          <h2 className="text-2xl font-semibold mb-4">Involvement</h2>
+          {cardsData
+            .filter(card => card.type === CardType.Involvement)
+            .map(card => (
+              <Card key={card.id} {...card} selectedSkill={selectedSkill} onSelectSkill={setSelectedSkill} />
+            ))}
+        </section>
+      </div>
     </div>
   );
 };
