@@ -10,12 +10,18 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --brand-text: #1A374D;         /* Deep teal */
+  --brand-accent: #85e0d4;       /* Seafoam */
+  --brand-tertiary: #366b79;
+  --gradient-start: #1B6CA8;     /* Ocean blue */
+  --gradient-mid: #71C9CE;       /* Light cyan */
+  --gradient-end: #A6E3E9;       /* Soft aqua */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #ffffff;
   }
 }
 
@@ -23,23 +29,4 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
-
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 1s ease-out forwards;
-}
-
-
-html {
-  scroll-behavior: smooth;
 }
