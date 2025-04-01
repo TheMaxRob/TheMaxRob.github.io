@@ -1,5 +1,6 @@
 import React from 'react';
 import SkillBubble from './SkillBubble';
+import { CardType } from './Home';
 
 interface CardProps {
   title: string;
@@ -12,6 +13,7 @@ interface CardProps {
   onSelectSkill: (skill: string) => void;
   startDate: Date | null;
   endDate: Date | "Present";
+  type: CardType
 }
 
 const Card: React.FC<CardProps> = ({
@@ -24,13 +26,14 @@ const Card: React.FC<CardProps> = ({
   selectedSkills,
   onSelectSkill,
   startDate,
-  endDate
+  endDate,
+  type
 }) => {
   const isFaded = selectedSkills.length > 0 && !skills.some(skill => selectedSkills.includes(skill));
 
   const formatDate = (date: Date | "Present" | undefined | null) => {
     if (!date) return '';
-    if (typeof date === 'string') return date === 'Present' ? 'In Progress' : date;
+    if (typeof date === 'string') return date === 'Present' && type === 'Experience' ? 'Present' : "In Progress";
     return date.toLocaleDateString(undefined, { month: 'short', year: 'numeric' });
   };
 
@@ -48,7 +51,7 @@ const Card: React.FC<CardProps> = ({
           <img
             src={image}
             alt={title}
-            className="w-16 h-16 rounded-full mr-4 object-cover"
+            className="w-16 h-16 mr-4 object-cover"
           />
         )}
         <div>

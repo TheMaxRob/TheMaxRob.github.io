@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Card from './Card';
 
-enum CardType {
+export enum CardType {
   Project = 'Project',
   Experience = 'Experience',
   Involvement = 'Involvement'
@@ -46,7 +46,7 @@ const App: React.FC = () => {
       id: 1,
       title: "geoChat",
       link: "https://github.com/ShaneBerhoff/geoChat",
-      image: "https://via.placeholder.com/150",
+      image: "./geoChatSS.jpg",
       description: "Built a full-stack, anonymous live chat app using React, NodeJS, MongoDB, Docker, AWS, and Socket.io. Achieved 99 unique users, 1000+ messages, and 600+ sessions using OSM geofencing data (87 zones).",
       skills: ["React", "NodeJS", "MongoDB", "Docker", "AWS", "Socket.io"],
       type: CardType.Project,
@@ -107,7 +107,7 @@ const App: React.FC = () => {
       skills: ["React", "Node.js", "Agile", "Jira"],
       type: CardType.Experience,
       startDate: new Date(2024, 9, 1),
-      endDate: new Date(2024, 11, 1)
+      endDate: "Present"
     },
     {
       id: 7,
@@ -117,7 +117,7 @@ const App: React.FC = () => {
       skills: ["IoT", "RFID", "Research"],
       type: CardType.Experience,
       startDate: new Date(2024, 8, 1),
-      endDate: new Date(2025, 5, 1)
+      endDate: "Present"
     },
     {
       id: 8,
@@ -290,10 +290,25 @@ const App: React.FC = () => {
         <section id="about" ref={aboutRef} className="mb-10">
           <h2 className="text-2xl font-semibold mb-2 text-[var(--brand-text)]">About Me</h2>
           <p className="text-[var(--brand-text)]">
-            I'm Max Roberts, a computer science student at Emory University passionate about building full-stack software that blends engaging user experiences with powerful backend infrastructure. From geofenced chat apps to interactive map visualizations and embedded systems, I love bringing ideas to life across platforms.
+            I had no interest in computer science when I was young; The only thing I wanted to do was play video games. Fortunately, a lot of people who knew nothing about computer science kept telling me "you love computer games, you should study computer science!" And so I did; I took an AP Programming course in high school, and I did terribly on the exam.
+          </p>
+          <br/>
+          <p className='text-[var(--brand-text)]'>
+            I've come a long way since that AP exam, and I've fallen in love with software along that path. Forming ideas, designing them, and getting to build things that impact people and make their lives better is one of the most exciting things I can imagine doing with my life.
+            I truly believe you can only become the best at what you do if you genuinely love it, and so I try to build things I love. 
+            Whether full-stack social platforms or data visualizers, I've started every one of my projects with no idea what I was doing. If you can perservere through something insurmountable to you, then you have become insurmountable to who you were before you began.
+          </p>
+          <br/>
+          <p className='text-[var(--brand-text)]'>
+            In my free time you can usually find me lifting weights, rock climbing, or learning languages (I speak Spanish and German).
+            I also love to travel, and am hoping to crack 30 visited countries before I graduate from Emory.
+          </p>
+
+          <br/>
+          <p className='text-[var(--brand-text)]'>
+
           </p>
         </section>
-
         <section id="experience" ref={experienceRef} className="mb-10">
           <h2 className="text-2xl font-semibold mb-4 text-[var(--brand-text)]">Experience</h2>
           {cardsData
