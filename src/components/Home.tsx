@@ -30,7 +30,9 @@ const App: React.FC = () => {
     );
   };
   
-  
+  const handleResetFilters = () => {
+    setSelectedSkills([]);
+  };
 
   // Section Refs
   const aboutRef = useRef<HTMLElement>(null);
@@ -272,6 +274,14 @@ const App: React.FC = () => {
             </svg>
           </a>
         </div>
+        <div>
+            <button 
+              onClick={handleResetFilters}
+              className="mt-8 px-16 py-2 rounded-full bg-[var(--brand-accent)] text-[var(--brand-text)] hover:opacity-90 transition delay-75"  
+            >
+              Reset Skill Filters
+            </button>
+          </div>
       </div>
 
       {/* Right Col */}
