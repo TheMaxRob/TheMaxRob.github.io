@@ -21,8 +21,16 @@ interface CardData {
 }
 
 const App: React.FC = () => {
-  const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
+  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [activeSection, setActiveSection] = useState<string>('about');
+
+  const handleSelectSkill = (skill: string) => {
+    setSelectedSkills(prev =>
+      prev.includes(skill) ? prev.filter(s => s !== skill) : [...prev, skill]
+    );
+  };
+  
+  
 
   // Section Refs
   const aboutRef = useRef<HTMLElement>(null);
@@ -234,8 +242,9 @@ const App: React.FC = () => {
       </nav>
 
       {/* Left Col */}
-      <div className="fixed top-0 left-0 w-1/2 h-screen flex flex-col gap-8 justify-center items-center border-r">
-        <h1 className="text-3xl font-bold mb-4 text-[var(--brand-text)]">Max Roberts</h1>
+      <div className="fixed top-0 left-0 w-1/2 h-screen flex flex-col gap-2 justify-center items-center border-r">
+        <h1 className="text-3xl font-bold text-[var(--brand-text)]">Hey! I'm Max Roberts.</h1>
+        <h3 className='text-lg font-semibold mb-4 text-[var(--brand-text)]'>Welcome to my website :)</h3>
         <div className="flex space-x-18">
           {/* Email Icon */}
           <a href="mailto:maxroberts2003@gmail.com" className="hover:opacity-80">
@@ -280,7 +289,7 @@ const App: React.FC = () => {
           {cardsData
             .filter(card => card.type === CardType.Experience)
             .map(card => (
-              <Card key={card.id} {...card} selectedSkill={selectedSkill} onSelectSkill={setSelectedSkill} />
+              <Card key={card.id} {...card} selectedSkills={selectedSkills} onSelectSkill={handleSelectSkill} />
             ))}
         </section>
 
@@ -289,7 +298,8 @@ const App: React.FC = () => {
           {cardsData
             .filter(card => card.type === CardType.Project)
             .map(card => (
-              <Card key={card.id} {...card} selectedSkill={selectedSkill} onSelectSkill={setSelectedSkill} />
+              <Card key={card.id} {...card} selectedSkills={selectedSkills} onSelectSkill={handleSelectSkill} />
+
             ))}
         </section>
 
@@ -298,7 +308,7 @@ const App: React.FC = () => {
           {cardsData
             .filter(card => card.type === CardType.Involvement)
             .map(card => (
-              <Card key={card.id} {...card} selectedSkill={selectedSkill} onSelectSkill={setSelectedSkill} />
+              <Card key={card.id} {...card} selectedSkills={selectedSkills} onSelectSkill={handleSelectSkill} />
             ))}
         </section>
       </div>

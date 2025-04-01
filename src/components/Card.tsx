@@ -8,8 +8,8 @@ interface CardProps {
   image?: string;
   description?: string;
   skills: string[];
-  selectedSkill: string | null;
-  onSelectSkill: (skill: string | null) => void;
+  selectedSkills: string[];
+  onSelectSkill: (skill: string) => void;
   startDate: Date | null;
   endDate: Date | "Present";
 }
@@ -21,12 +21,12 @@ const Card: React.FC<CardProps> = ({
   image,
   description,
   skills,
-  selectedSkill,
+  selectedSkills,
   onSelectSkill,
   startDate,
   endDate
 }) => {
-  const isFaded = selectedSkill !== null && !skills.includes(selectedSkill);
+  const isFaded = selectedSkills.length > 0 && !skills.some(skill => selectedSkills.includes(skill));
 
   const formatDate = (date: Date | "Present" | undefined | null) => {
     if (!date) return '';
@@ -62,7 +62,7 @@ const Card: React.FC<CardProps> = ({
               {title}
               {/* External link icon */}
               <svg xmlns="http://www.w3.org/2000/svg" className="inline ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h7m0 0v7m0-7L10 21" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
             </a>
           ) : (
@@ -81,7 +81,7 @@ const Card: React.FC<CardProps> = ({
           <SkillBubble
             key={skill}
             skill={skill}
-            selectedSkill={selectedSkill}
+            selectedSkills={selectedSkills}
             onSelect={onSelectSkill}
           />
         ))}
