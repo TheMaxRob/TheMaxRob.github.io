@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Card from './Card';
+import rawCards from '../cards.json';
 
 export enum CardType {
   Project = 'Project',
@@ -40,127 +41,16 @@ const App: React.FC = () => {
   const projectsRef = useRef<HTMLElement>(null);
   const involvementRef = useRef<HTMLElement>(null);
 
-  const cardsData: CardData[] = [
-    // Personal Projects 
-    {
-      id: 1,
-      title: "geoChat",
-      link: "https://github.com/ShaneBerhoff/geoChat",
-      image: "./geoChatSS.jpg",
-      description: "Built a full-stack, anonymous live chat app using React, NodeJS, MongoDB, Docker, AWS, and Socket.io. Achieved 99 unique users, 1000+ messages, and 600+ sessions using OSM geofencing data (87 zones).",
-      skills: ["React", "NodeJS", "MongoDB", "Docker", "AWS", "Socket.io"],
-      type: CardType.Project,
-      startDate: null,
-      endDate: new Date(2023, 5, 1)    // June 1, 2023
-    },
-    {
-      id: 2,
-      title: "Solo",
-      link: "https://github.com/TheMaxRob/Solo",
-      image: "https://via.placeholder.com/150",
-      description: "Implemented a globe-based navigation system with SwiftUI and MapKit to display events. Utilized Firebase for real-time data syncing, authentication, and caching.",
-      skills: ["SwiftUI", "MapKit", "Firebase"],
-      type: CardType.Project,
-      startDate: null,
-      endDate: "Present"
-    },
-    {
-      id: 3,
-      title: "Worldline",
-      link: "https://github.com/emory-worldline/worldline",
-      image: "https://via.placeholder.com/150",
-      description: "Developed a data visualizer for photo library metadata using React Native, Expo, and Mapbox. Created custom animations and managed dynamic data clusters.",
-      skills: ["React Native", "Expo", "Mapbox"],
-      type: CardType.Project,
-      startDate: null,
-      endDate: new Date(2024, 11, 1)
-    },
-    {
-      id: 4,
-      title: "Venmo Receipt Scanner",
-      link: "https://github.com/TheMaxRob/Venmo-Receipt-Scanner",
-      image: "https://via.placeholder.com/150",
-      description: "A full-stack app that parses receipt items using React Native, Python/Flask, Pytesseract, and OpenCV. Integrates with the Venmo API for automated transactions.",
-      skills: ["React Native", "Python", "Flask", "Pytesseract", "OpenCV"],
-      type: CardType.Project,
-      startDate: null,
-      endDate: new Date(2024, 2, 1)
-    },
-    {
-      id: 5,
-      title: "Raspberry Pi Friend Recognizer",
-      link: "https://github.com/TheMaxRob/RpiFaceDetector",
-      image: "https://via.placeholder.com/150",
-      description: "An in-progress facial recognition system using C++ and OpenCV on a Raspberry Pi. Designed to differentiate friends in real time with a Pi Camera.",
-      skills: ["C++", "OpenCV", "Raspberry Pi"],
-      type: CardType.Project,
-      startDate: null,
-      endDate: "Present"
-    },
 
-    // Professional Experience
-    {
-      id: 6,
-      title: "nCent Holdings",
-      subtitle: "Full-stack Software Engineer Intern",
-      description: "Serving as a Full-Stack Engineer Intern, developing the nCent platform with React and Node.js. Built the database system to enable users to monetize their personal data using Agile workflows and Jira.",
-      skills: ["React", "Node.js", "Agile", "Jira"],
-      type: CardType.Experience,
-      startDate: new Date(2024, 9, 1),
-      endDate: "Present"
-    },
-    {
-      id: 7,
-      title: "Emory Computer Research Lab",
-      subtitle: "Undergraduate Researcher | Atlanta, GA",
-      description: "Conducting research on creating programmable IoT ecosystems with simultaneous RFID Tag Readers.",
-      skills: ["IoT", "RFID", "Research"],
-      type: CardType.Experience,
-      startDate: new Date(2024, 8, 1),
-      endDate: "Present"
-    },
-    {
-      id: 8,
-      title: "Guardian Owl Digital",
-      subtitle: "Development Intern | Louisville, KY",
-      description: "Worked as a Development Intern, managing blog content, optimizing SEO, and creating a GPT model for advertising and website audits while collaborating with clients on marketing strategies.",
-      skills: ["SEO", "GPT", "Marketing"],
-      type: CardType.Experience,
-      startDate: new Date(2024, 5, 1),
-      endDate: new Date(2024, 7, 1)
-    },
 
-    // Community Involvement 
-    {
-      id: 9,
-      title: "Emory Impact Investing Group",
-      subtitle: "Senior Analyst",
-      link: "https://www.emoryimpactinvesting.com/",
-      description: "Managed a $250,000 investment fund to provide microloans and pro-bono consulting to entrepreneurs in Atlanta.",
-      skills: ["Consulting", "Finance", "Project Management", "Leadership"],
-      type: CardType.Involvement,
-      startDate: new Date(2023, 0, 1),
-      endDate: new Date(2024, 8, 1)
-    },
-    {
-      id: 10,
-      title: "Emory Rock Climbing Team",
-      subtitle: "Member",
-      skills: ["Teamwork", "Fitness", "Climbing"],
-      type: CardType.Involvement,
-      startDate: new Date(2023, 7, 1),
-      endDate: new Date(2024, 11, 1)
-    },
-    {
-      id: 11,
-      title: "Kappa Alpha Epsilon",
-      subtitle: "Philanthropy Chair",
-      skills: ["Philanthropy", "Fundraising", "Leadership"],
-      type: CardType.Involvement,
-      startDate: new Date(2024, 9, 1),
-      endDate: new Date(2025, 5, 1)
-    }
-  ];
+
+  const cardsData: CardData[] = rawCards.map((card: any) => ({
+    ...card,
+    startDate: card.startDate ? new Date(card.startDate) : null,
+    endDate:
+      card.endDate === 'Present' ? 'Present' : new Date(card.endDate)
+  }));
+
 
   // IntersectionObserver - section tracking
   useEffect(() => {
@@ -277,7 +167,7 @@ const App: React.FC = () => {
         <div>
             <button 
               onClick={handleResetFilters}
-              className="mt-8 px-16 py-2 rounded-full bg-[var(--brand-accent)] text-[var(--brand-text)] hover:opacity-90 transition delay-75"  
+              className="mt-8 px-16 py-2 rounded-full bg-[var(--brand-accent)] text-[var(--brand-text)] hover:opacity-90 transition delay-75 hover: cursor-pointer"  
             >
               Reset Skill Filters
             </button>
@@ -290,7 +180,7 @@ const App: React.FC = () => {
         <section id="about" ref={aboutRef} className="mb-10">
           <h2 className="text-2xl font-semibold mb-2 text-[var(--brand-text)]">About Me</h2>
           <p className="text-[var(--brand-text)]">
-            I had no interest in computer science when I was young; The only thing I wanted to do was play video games. Fortunately, a lot of people who knew nothing about computer science kept telling me "you love computer games, you should study computer science!" And so I did; I took an AP Programming course in high school, and I did terribly on the exam.
+            I had no interest in computer science when I was young; The only thing I wanted to do was play video games. Fortunately, a lot of people who knew nothing about computer science kept telling me "you love computer games, you should study computer science!" And so I did; I took an AP Programming course in high school... and I did terribly on the exam.
           </p>
           <br/>
           <p className='text-[var(--brand-text)]'>

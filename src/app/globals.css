@@ -10,12 +10,12 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --brand-text: #1A374D;         /* Deep teal */
-  --brand-accent: #91dfd5;       /* Seafoam */
+  --brand-text: #1A374D;         
+  --brand-accent: #91dfd5;       
   --brand-tertiary: #366b79;
-  --gradient-start: #1B6CA8;     /* Ocean blue */
-  --gradient-mid: #71C9CE;       /* Light cyan */
-  --gradient-end: #A6E3E9;       /* Soft aqua */
+  --gradient-start: #ffffff;     
+  --gradient-mid: #fffbf4;       
+  --gradient-end: #fef6e9;       
 }
 
 @media (prefers-color-scheme: dark) {

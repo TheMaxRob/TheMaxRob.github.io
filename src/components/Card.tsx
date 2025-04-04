@@ -51,7 +51,7 @@ const Card: React.FC<CardProps> = ({
           <img
             src={image}
             alt={title}
-            className="w-16 h-16 mr-4 object-cover"
+            className="w-32 h-32 mr-4 object-contain"
           />
         )}
         <div>
