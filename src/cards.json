@@ -14,7 +14,7 @@
       "id": 2,
       "title": "Solo",
       "link": "https://github.com/TheMaxRob/Solo",
-      "image": "https://via.placeholder.com/150",
+      "image": "./Solo.jpeg",
       "description": "Implemented a globe-based navigation system with SwiftUI and MapKit to display events. Utilized Firebase for real-time data syncing, authentication, and caching.",
       "skills": ["SwiftUI", "MapKit", "Firebase"],
       "type": "Project",
