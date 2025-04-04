@@ -198,7 +198,7 @@ const App: React.FC = () => {
         <section id="about" ref={aboutRef} className="mb-10">
           <h2 className="text-2xl font-semibold mb-2 text-[var(--brand-text)]">About Me</h2>
           <p className="text-[var(--brand-text)]">
-            I had no interest in computer science when I was young; The only thing I wanted to do was play video games. Fortunately, a lot of people who knew nothing about computer science kept telling me &quot;you love computer games, you should study computer science!&quot; And so I did; I took an AP Programming course in high school... and I did terribly on the exam.
+            I had no interest in computer science when I was young; the only thing I wanted to do was play video games. Fortunately, a lot of people who knew nothing about computer science kept telling me &quot;you love computer games, you should study computer science!&quot; And so I did; I took an AP Programming course in high school... and I did terribly on the exam.
           </p>
           <br/>
           <p className='text-[var(--brand-text)]'>
