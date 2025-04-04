@@ -164,7 +164,7 @@ const App: React.FC = () => {
 
           </a>
           {/* Resume */}
-          <a href="/MaxRobertsResume.pdf" download className="hover:opacity-80">
+          <a href="/MaxRobertsResumePDF.pdf" download className="hover:opacity-80">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 inline ml-1 text-[var(--brand-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16h8M8 12h8M8 8h4m2-6H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
           </svg>
