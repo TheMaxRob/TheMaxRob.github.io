@@ -8,6 +8,19 @@ export enum CardType {
   Involvement = 'Involvement'
 }
 
+interface rawCardData {
+  id: number;
+  title: string;
+  subtitle?: string;
+  link?: string;
+  image?: string;
+  description?: string;
+  skills: string[];
+  type: string;
+  startDate?: string;
+  endDate?: string;
+}
+
 interface CardData {
   id: number;
   title: string;
@@ -44,13 +57,18 @@ const App: React.FC = () => {
 
 
 
-  const cardsData: CardData[] = rawCards.map((card: any) => ({
+  const cardsData: CardData[] = (rawCards as rawCardData[]).map((card) => ({
     ...card,
+    type: card.type as CardType,
     startDate: card.startDate ? new Date(card.startDate) : null,
     endDate:
-      card.endDate === 'Present' ? 'Present' : new Date(card.endDate)
+    card.endDate === 'Present'
+      ? 'Present'
+      : card.endDate
+        ? new Date(card.endDate)
+        : new Date()
   }));
-
+  
 
   // IntersectionObserver - section tracking
   useEffect(() => {
@@ -135,7 +153,7 @@ const App: React.FC = () => {
 
       {/* Left Col */}
       <div className="fixed top-0 left-0 w-1/2 h-screen flex flex-col gap-2 justify-center items-center border-r">
-        <h1 className="text-3xl font-bold text-[var(--brand-text)]">Hey! I'm Max Roberts.</h1>
+        <h1 className="text-3xl font-bold text-[var(--brand-text)]">Hey! I&rsquo;m Max Roberts.</h1>
         <h3 className='text-lg font-semibold mb-4 text-[var(--brand-text)]'>Welcome to my website :)</h3>
         <div className="flex space-x-18">
           {/* Email Icon */}
@@ -180,13 +198,13 @@ const App: React.FC = () => {
         <section id="about" ref={aboutRef} className="mb-10">
           <h2 className="text-2xl font-semibold mb-2 text-[var(--brand-text)]">About Me</h2>
           <p className="text-[var(--brand-text)]">
-            I had no interest in computer science when I was young; The only thing I wanted to do was play video games. Fortunately, a lot of people who knew nothing about computer science kept telling me "you love computer games, you should study computer science!" And so I did; I took an AP Programming course in high school... and I did terribly on the exam.
+            I had no interest in computer science when I was young; The only thing I wanted to do was play video games. Fortunately, a lot of people who knew nothing about computer science kept telling me &quot;you love computer games, you should study computer science!&quot; And so I did; I took an AP Programming course in high school... and I did terribly on the exam.
           </p>
           <br/>
           <p className='text-[var(--brand-text)]'>
-            I've come a long way since that AP exam, and I've fallen in love with software along that path. Forming ideas, designing them, and getting to build things that impact people and make their lives better is one of the most exciting things I can imagine doing with my life.
+            I&rsquo;ve come a long way since that AP exam, and I&rsquo;ve fallen in love with software along that path. Forming ideas, designing them, and getting to build things that impact people and make their lives better is one of the most exciting things I can imagine doing with my life.
             I truly believe you can only become the best at what you do if you genuinely love it, and so I try to build things I love. 
-            Whether full-stack social platforms or data visualizers, I've started every one of my projects with no idea what I was doing. If you can perservere through something insurmountable to you, then you have become insurmountable to who you were before you began.
+            Whether full-stack social platforms or data visualizers, I&rsquo;ve started every one of my projects with no idea what I was doing. If you can perservere through something insurmountable to you, then you have become insurmountable to who you were before you began.
           </p>
           <br/>
           <p className='text-[var(--brand-text)]'>

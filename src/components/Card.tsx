@@ -1,6 +1,7 @@
 import React from 'react';
 import SkillBubble from './SkillBubble';
 import { CardType } from './Home';
+import Image from 'next/image';
 
 interface CardProps {
   title: string;
@@ -48,11 +49,14 @@ const Card: React.FC<CardProps> = ({
       <div className="flex items-center">
         {/* If image exists, display it */}
         {image && (
-          <img
+          <Image
             src={image}
             alt={title}
+            width={128}
+            height={128}
             className="w-32 h-32 mr-4 object-contain"
           />
+        
         )}
         <div>
           {link ? (
