@@ -51,7 +51,7 @@ const Card: React.FC<CardProps> = ({
         {image && (
           <Image
             src={image}
-            alt={title}
+            alt={""}
             width={128}
             height={128}
             className="w-32 h-32 mr-4 object-contain"

@@ -36,7 +36,7 @@
       "id": 4,
       "title": "Venmo Receipt Scanner",
       "link": "https://github.com/TheMaxRob/Venmo-Receipt-Scanner",
-      "image": "https://via.placeholder.com/150",
+
       "description": "A full-stack app that parses receipt items using React Native, Python/Flask, Pytesseract, and OpenCV. Integrates with the Venmo API for automated transactions.",
       "skills": ["React Native", "Python", "Flask", "Pytesseract", "OpenCV"],
       "type": "Project",
@@ -47,7 +47,7 @@
       "id": 5,
       "title": "Raspberry Pi Friend Recognizer",
       "link": "https://github.com/TheMaxRob/RpiFaceDetector",
-      "image": "https://via.placeholder.com/150",
+      
       "description": "An in-progress facial recognition system using C++ and OpenCV on a Raspberry Pi. Designed to differentiate friends in real time with a Pi Camera.",
       "skills": ["C++", "OpenCV", "Raspberry Pi"],
       "type": "Project",
