@@ -1,117 +1,117 @@
 [
-    {
-      "id": 1,
-      "title": "geoChat",
-      "link": "https://github.com/ShaneBerhoff/geoChat",
-      "image": "/geoChatSS.jpg",
-      "description": "Built a full-stack, anonymous live chat app using React, NodeJS, MongoDB, Docker, AWS, and Socket.io. Achieved 99 unique users, 1000+ messages, and 600+ sessions using OSM geofencing data (87 zones).",
-      "skills": ["React", "NodeJS", "MongoDB", "Docker", "AWS", "Socket.io"],
-      "type": "Project",
-      "startDate": null,
-      "endDate": "2023-06-01"
-    },
-    {
-      "id": 2,
-      "title": "Solo",
-      "link": "https://github.com/TheMaxRob/Solo",
-      "image": "./Solo.jpeg",
-      "description": "Implemented a globe-based navigation system with SwiftUI and MapKit to display events. Utilized Firebase for real-time data syncing, authentication, and caching.",
-      "skills": ["SwiftUI", "MapKit", "Firebase"],
-      "type": "Project",
-      "startDate": null,
-      "endDate": "Present"
-    },
-    {
-      "id": 3,
-      "title": "Worldline",
-      "link": "https://github.com/emory-worldline/worldline",
-      "image": "/WorldlinePhoto.jpg",
-      "description": "Developed a data visualizer for photo library metadata using React Native, Expo, and Mapbox. Created custom animations and managed dynamic data clusters.",
-      "skills": ["React Native", "Expo", "Mapbox"],
-      "type": "Project",
-      "startDate": null,
-      "endDate": "2024-12-01"
-    },
-    {
-      "id": 4,
-      "title": "Venmo Receipt Scanner",
-      "link": "https://github.com/TheMaxRob/Venmo-Receipt-Scanner",
+  {
+    "id": 1,
+    "title": "geoChat",
+    "link": "https://github.com/ShaneBerhoff/geoChat",
+    "image": "/geoChatSS.jpg",
+    "description": "A duo-dev passion project my friend and I started to improve school spirit at Emory. Many schools have small quirks unique to their schools, and we envisioned geoChat as Emory's; a collection of real-time, anonymous chatrooms only accessible when you are within each chatroom's specified zone on Emory's campus. This project taught me how to develop for production, create a CI/CD pipeline, and how to build efficient full-stack web applications.",
+    "skills": ["React", "NodeJS", "MongoDB", "Docker", "AWS", "Socket.io"],
+    "type": "Project",
+    "startDate": null,
+    "endDate": "2023-06-01"
+  },
+  {
+    "id": 2,
+    "title": "Solo",
+    "link": "https://github.com/TheMaxRob/Solo",
+    "image": "https://via.placeholder.com/150",
+    "description": "I began developing this project after my semester abroad. I traveled a lot during this time period, often alone, and I realized that what makes or break these kinds of trips are the people you meet while traveling. To facilitate better travel experiences, I built a platform to help travelers meet each other in foreing cities. I learned how to design an efficient database, create smooth, safe user experience, and efficiently cache information to reduce database reads.",
+    "skills": ["SwiftUI", "MapKit", "Firebase"],
+    "type": "Project",
+    "startDate": null,
+    "endDate": "Present"
+  },
+  {
+    "id": 3,
+    "title": "Worldline",
+    "link": "https://github.com/emory-worldline/worldline",
+    "image": "/WorldlinePhoto.jpg",
+    "description": "Worldline is a cross-platform app that uses the user's photo library metadata to create visualizations of their journey across space and time over the years. Developing this app was fun and challenging – the titular 'Worldline' feature was an especially technical challenge that I enjoyed tackling. This was my first personal project in which I worked on a large developer team with several classmates. Navigating a team of people all with different backgrounds and skill levels was difficult but taught me a lot about how to handle working with a diverse team.",
+    "skills": ["React Native", "Expo", "Mapbox", "Agile"],
+    "type": "Project",
+    "startDate": null,
+    "endDate": "2024-12-01"
+  },
+  {
+    "id": 4,
+    "title": "Venmo Receipt Scanner",
+    "link": "https://github.com/TheMaxRob/Venmo-Receipt-Scanner",
+    "image": "https://via.placeholder.com/150",
+    "description": "I developed this app because I got fed up with manually splitting the bill at restaurants with my friends. This application allows you to take a picture of a receipt, cleans the picture up for processing, and then determines which lines represent purchased items and their prices. It then pulls your Venmo friend list and allows you to assign items to each of them and automatically send them Venmo requests.",
+    "skills": ["React Native", "Python", "Flask", "Pytesseract", "OpenCV"],
+    "type": "Project",
+    "startDate": null,
+    "endDate": "2024-03-01"
+  },
+  {
+    "id": 5,
+    "title": "Raspberry Pi Friend Recognizer",
+    "link": "https://github.com/TheMaxRob/RpiFaceDetector",
+    "image": "https://via.placeholder.com/150",
+    "description": "An in-progress facial recognition system using C++ and OpenCV on a Raspberry Pi that I designed to differentiate my friends in real time with a Pi Camera. I've run into a snag with circumventing the Emory's enterprise network to allow my Pi to connect, so this project has been slow-going.",
+    "skills": ["C++", "OpenCV", "Raspberry Pi"],
+    "type": "Project",
+    "startDate": null,
+    "endDate": "Present"
+  },
+  {
+    "id": 6,
+    "title": "nCent Holdings",
+    "subtitle": "Full-stack Software Engineer Intern",
+    "description": "Serving as a Full-Stack Engineer Intern, developing the nCent platform – a platform that allows users to make money monetizing their own personal data for targeted marketing purposes.",
+    "skills": ["React", "Node.js", "Agile"],
+    "type": "Experience",
+    "startDate": "2024-10-01",
+    "endDate": "Present"
+  },
+  {
+    "id": 7,
+    "title": "Emory Computer Research Lab",
+    "subtitle": "Undergraduate Researcher | Atlanta, GA",
+    "description": "Conducting research on using simultaneous RFID Tag Readers to create a programmable ecosystem of IoT stickers that enable embedding internet capabilities into the environment, particularly in regards to DIY projects..",
+    "skills": ["IoT", "Research", "Microcontrollers"],
+    "type": "Experience",
+    "startDate": "2024-09-01",
+    "endDate": "Present"
+  },
+  {
+    "id": 8,
+    "title": "Guardian Owl Digital",
+    "subtitle": "Development Intern | Louisville, KY",
+    "description": "Worked as a Development Intern managing blog content, optimizing SEO for Guardian Owl's Website, assisting with Google Analytics for clients, and creating a GPT model for advising clients on marketing strategies.",
+    "skills": ["SEO", "Marketing"],
+    "type": "Experience",
+    "startDate": "2024-06-01",
+    "endDate": "2024-08-01"
+  },
+  {
+    "id": 9,
+    "title": "Emory Impact Investing Group",
+    "subtitle": "Senior Analyst",
+    "link": "https://www.emoryimpactinvesting.com/",
+    "description": "Managed a $250,000 investment fund to provide microloans and pro-bono consulting to entrepreneurs in Atlanta. Struggling/low numbers of microbusinesses is associated with poverty and slow economic growth, and Emory Impact Investing Group's mission is to reduce the microbusiness gap in Atlanta.",
+    "skills": ["Consulting", "Project Management"],
+    "type": "Involvement",
+    "startDate": "2023-01-01",
+    "endDate": "2024-09-01"
+  },
+  {
+    "id": 10,
+    "title": "Emory Rock Climbing Team",
+    "subtitle": "Member",
+    "skills": [],
+    "type": "Involvement",
+    "startDate": "2023-08-01",
+    "endDate": "2024-12-01"
+  },
+  {
+    "id": 11,
+    "title": "Kappa Alpha Epsilon",
+    "subtitle": "Philanthropy Chair",
+    "skills": [],
+    "type": "Involvement",
+    "startDate": "2024-10-01",
+    "endDate": "2025-06-01"
+  }
+]
 
-      "description": "A full-stack app that parses receipt items using React Native, Python/Flask, Pytesseract, and OpenCV. Integrates with the Venmo API for automated transactions.",
-      "skills": ["React Native", "Python", "Flask", "Pytesseract", "OpenCV"],
-      "type": "Project",
-      "startDate": null,
-      "endDate": "2024-03-01"
-    },
-    {
-      "id": 5,
-      "title": "Raspberry Pi Friend Recognizer",
-      "link": "https://github.com/TheMaxRob/RpiFaceDetector",
-      
-      "description": "An in-progress facial recognition system using C++ and OpenCV on a Raspberry Pi. Designed to differentiate friends in real time with a Pi Camera.",
-      "skills": ["C++", "OpenCV", "Raspberry Pi"],
-      "type": "Project",
-      "startDate": null,
-      "endDate": "Present"
-    },
-    {
-      "id": 6,
-      "title": "nCent Holdings",
-      "subtitle": "Full-stack Software Engineer Intern",
-      "description": "Serving as a Full-Stack Engineer Intern, developing the nCent platform with React and Node.js. Built the database system to enable users to monetize their personal data using Agile workflows and Jira.",
-      "skills": ["React", "Node.js", "Agile", "Jira"],
-      "type": "Experience",
-      "startDate": "2024-10-01",
-      "endDate": "Present"
-    },
-    {
-      "id": 7,
-      "title": "Emory Computer Research Lab",
-      "subtitle": "Undergraduate Researcher | Atlanta, GA",
-      "description": "Conducting research on creating programmable IoT ecosystems with simultaneous RFID Tag Readers.",
-      "skills": ["IoT", "RFID", "Research"],
-      "type": "Experience",
-      "startDate": "2024-09-01",
-      "endDate": "Present"
-    },
-    {
-      "id": 8,
-      "title": "Guardian Owl Digital",
-      "subtitle": "Development Intern | Louisville, KY",
-      "description": "Worked as a Development Intern, managing blog content, optimizing SEO, and creating a GPT model for advertising and website audits while collaborating with clients on marketing strategies.",
-      "skills": ["SEO", "GPT", "Marketing"],
-      "type": "Experience",
-      "startDate": "2024-06-01",
-      "endDate": "2024-08-01"
-    },
-    {
-      "id": 9,
-      "title": "Emory Impact Investing Group",
-      "subtitle": "Senior Analyst",
-      "link": "https://www.emoryimpactinvesting.com/",
-      "description": "Managed a $250,000 investment fund to provide microloans and pro-bono consulting to entrepreneurs in Atlanta.",
-      "skills": ["Consulting", "Project Management"],
-      "type": "Involvement",
-      "startDate": "2023-01-01",
-      "endDate": "2024-09-01"
-    },
-    {
-      "id": 10,
-      "title": "Emory Rock Climbing Team",
-      "subtitle": "Member",
-      "skills": [],
-      "type": "Involvement",
-      "startDate": "2023-08-01",
-      "endDate": "2024-12-01"
-    },
-    {
-      "id": 11,
-      "title": "Kappa Alpha Epsilon",
-      "subtitle": "Philanthropy Chair",
-      "skills": [],
-      "type": "Involvement",
-      "startDate": "2024-10-01",
-      "endDate": "2025-06-01"
-    }
-  ]
-  
