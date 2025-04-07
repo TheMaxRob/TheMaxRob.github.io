@@ -39,10 +39,11 @@ const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('about');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   
-  // Animation states
-  const [showHeading, setShowHeading] = useState<boolean>(false);
-  const [showSubheading, setShowSubheading] = useState<boolean>(false);
-  const [showContent, setShowContent] = useState<boolean>(false);
+  // Animation states - default to true (visible) in case localStorage is not available
+  const [showHeading, setShowHeading] = useState<boolean>(true);
+  const [showSubheading, setShowSubheading] = useState<boolean>(true);
+  const [showContent, setShowContent] = useState<boolean>(true);
+  const [shouldAnimate, setShouldAnimate] = useState<boolean>(false);
 
   const handleSelectSkill = (skill: string) => {
     setSelectedSkills(prev =>
@@ -116,23 +117,68 @@ const App: React.FC = () => {
     };
   }, []);
   
-  // Fade-in animation sequence
+  // Check if this is first visit or page reload
   useEffect(() => {
-    // First, show the heading
-    setTimeout(() => {
-      setShowHeading(true);
-    }, 300);
-    
-    // Then show the subheading
-    setTimeout(() => {
-      setShowSubheading(true);
-    }, 1000);
-    
-    // Finally show the rest of the content
-    setTimeout(() => {
-      setShowContent(true);
-    }, 1700);
+    try {
+      // Check if we've previously shown the animation
+      const hasVisitedBefore = localStorage.getItem('hasVisitedPortfolio');
+      
+      // If this is their first visit, or it's been more than a day since their last visit
+      if (!hasVisitedBefore) {
+        // Set initial states to invisible
+        setShowHeading(false);
+        setShowSubheading(false);
+        setShowContent(false);
+        setShouldAnimate(true);
+        
+        // Save that they've visited
+        localStorage.setItem('hasVisitedPortfolio', 'true');
+        
+        // Optional: You could also store a timestamp to reset the animation after a certain period
+        localStorage.setItem('lastVisit', new Date().toISOString());
+      } else {
+        // Optional: Check if it's been a while since their last visit (e.g., 1 day)
+        const lastVisit = localStorage.getItem('lastVisit');
+        if (lastVisit) {
+          const lastVisitDate = new Date(lastVisit);
+          const currentDate = new Date();
+          const daysSinceLastVisit = (currentDate.getTime() - lastVisitDate.getTime()) / (1000 * 3600 * 24);
+          
+          // If it's been more than a day, show the animation again
+          if (daysSinceLastVisit > 1) {
+            setShowHeading(false);
+            setShowSubheading(false);
+            setShowContent(false);
+            setShouldAnimate(true);
+            localStorage.setItem('lastVisit', currentDate.toISOString());
+          }
+        }
+      }
+    } catch (error) {
+      // If localStorage is not available (private browsing, etc), default to not animating
+      console.warn('Could not access localStorage:', error);
+    }
   }, []);
+  
+  // Fade-in animation sequence - only runs if shouldAnimate is true
+  useEffect(() => {
+    if (shouldAnimate) {
+      // First, show the heading
+      setTimeout(() => {
+        setShowHeading(true);
+      }, 200);
+      
+      // Then show the subheading
+      setTimeout(() => {
+        setShowSubheading(true);
+      }, 1000);
+      
+      // Finally show the rest of the content
+      setTimeout(() => {
+        setShowContent(true);
+      }, 2000);
+    }
+  }, [shouldAnimate]);
   
   return (
     <div className="min-h-screen bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]">
