@@ -39,10 +39,11 @@ const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('about');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   
-  // Animation states
-  const [showHeading, setShowHeading] = useState<boolean>(false);
-  const [showSubheading, setShowSubheading] = useState<boolean>(false);
-  const [showContent, setShowContent] = useState<boolean>(false);
+  // Animation states - default to visible
+  const [showHeading, setShowHeading] = useState<boolean>(true);
+  const [showSubheading, setShowSubheading] = useState<boolean>(true);
+  const [showContent, setShowContent] = useState<boolean>(true);
+  const [shouldAnimate, setShouldAnimate] = useState<boolean>(false);
 
   const handleSelectSkill = (skill: string) => {
     setSelectedSkills(prev =>
@@ -75,7 +76,7 @@ const App: React.FC = () => {
   const handleNavClick = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     setActiveSection(sectionId);
-    setMobileMenuOpen(false); // Close mobile menu when navigating
+    setMobileMenuOpen(false); 
   };
 
   // IntersectionObserver - section tracking
@@ -116,23 +117,61 @@ const App: React.FC = () => {
     };
   }, []);
   
+  useEffect(() => {
+    try {
+      // Check hasVisited
+      const hasVisitedBefore = localStorage.getItem('hasVisitedPortfolio');
+      
+      // If this is their first visit, or it's been more than a day since their last visit
+      if (!hasVisitedBefore) {
+        // Set initial states to invisible
+        setShowHeading(false);
+        setShowSubheading(false);
+        setShowContent(false);
+        setShouldAnimate(true);
+        
+        localStorage.setItem('hasVisitedPortfolio', 'true');
+      } else {
+        const lastVisit = localStorage.getItem('lastVisit');
+        if (lastVisit) {
+          const lastVisitDate = new Date(lastVisit);
+          const currentDate = new Date();
+          const daysSinceLastVisit = (currentDate.getTime() - lastVisitDate.getTime()) / (1000 * 3600 * 24);
+          
+          // If it's been more than a day, show the animation again
+          if (daysSinceLastVisit > 1) {
+            setShowHeading(false);
+            setShowSubheading(false);
+            setShowContent(false);
+            setShouldAnimate(true);
+            localStorage.setItem('lastVisit', currentDate.toISOString());
+          }
+        }
+      }
+    } catch (error) {
+      console.warn('Could not access localStorage:', error);
+    }
+  }, []);
+  
   // Fade-in animation sequence
   useEffect(() => {
-    // First, show the heading
-    setTimeout(() => {
-      setShowHeading(true);
-    }, 300);
-    
-    // Then show the subheading
-    setTimeout(() => {
-      setShowSubheading(true);
-    }, 1000);
-    
-    // Finally show the rest of the content
-    setTimeout(() => {
-      setShowContent(true);
-    }, 1700);
-  }, []);
+    if (shouldAnimate) {
+      // Heading
+      setTimeout(() => {
+        setShowHeading(true);
+      }, 200);
+      
+      // Subheading
+      setTimeout(() => {
+        setShowSubheading(true);
+      }, 1000);
+      
+      // All content
+      setTimeout(() => {
+        setShowContent(true);
+      }, 2000);
+    }
+  }, [shouldAnimate]);
   
   return (
     <div className="min-h-screen bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]">
@@ -257,7 +296,7 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Col (Content Sections) - Full width on mobile, 50% width on desktop */}
+        {/* Right Col - Full width on mobile, 50% width on desktop */}
         <div className={`w-full md:w-1/2 md:ml-[50%] p-4 md:p-6 pt-[280px] md:pt-24 overflow-y-auto min-h-screen scroll-smooth transition-opacity duration-700 ease-in-out ${showContent ? 'opacity-100' : 'opacity-0'}`}>
           {/* Content Sections */}
           <section id="about" ref={aboutRef} className="mb-10 scroll-mt-20">
