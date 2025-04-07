@@ -78,12 +78,14 @@ const App: React.FC = () => {
       { id: 'projects', ref: projectsRef },
       { id: 'involvement', ref: involvementRef }
     ];
-
+  
     const observerOptions = {
       root: null,
-      threshold: 0.1
+      threshold: 0.5, 
+      rootMargin: '-100px 0px -40% 0px' 
     };
 
+  
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -91,13 +93,13 @@ const App: React.FC = () => {
         }
       });
     }, observerOptions);
-
+  
     sections.forEach((section) => {
       if (section.ref.current) {
         observer.observe(section.ref.current);
       }
     });
-
+  
     return () => {
       sections.forEach((section) => {
         if (section.ref.current) {
@@ -106,6 +108,7 @@ const App: React.FC = () => {
       });
     };
   }, []);
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]">
@@ -158,7 +161,7 @@ const App: React.FC = () => {
         <div className="flex space-x-18">
           {/* Email Icon */}
           <a href="mailto:maxroberts2003@gmail.com" className="hover:opacity-80">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 inline ml-1 text-[var(--brand-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 inline ml-1 text-[var(--brand-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l9 6 9-6M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z" />
           </svg>
 
@@ -195,7 +198,7 @@ const App: React.FC = () => {
       {/* Right Col */}
       <div className="ml-[50%] w-1/2 pt-24 p-6 overflow-y-auto h-screen scroll-smooth">
         {/* Content Sections */}
-        <section id="about" ref={aboutRef} className="mb-10">
+        <section id="about" ref={aboutRef} className="mb-10 scroll-mt-20">
           <h2 className="text-2xl font-semibold mb-2 text-[var(--brand-text)]">About Me</h2>
           <p className="text-[var(--brand-text)]">
             I had no interest in computer science when I was young; the only thing I wanted to do was play video games. Fortunately, a lot of people who knew nothing about computer science kept telling me &quot;you love computer games, you should study computer science!&quot; And so I did; I took an AP Programming course in high school... and I did terribly on the exam.
@@ -204,12 +207,16 @@ const App: React.FC = () => {
           <p className='text-[var(--brand-text)]'>
             I&rsquo;ve come a long way since that AP exam, and I&rsquo;ve fallen in love with software along that path. Forming ideas, designing them, and getting to build things that impact people and make their lives better is one of the most exciting things I can imagine doing with my life.
             I truly believe you can only become the best at what you do if you genuinely love it, and so I try to build things I love. 
-            Whether full-stack social platforms or data visualizers, I&rsquo;ve started every one of my projects with no idea what I was doing. If you can perservere through something insurmountable to you, then you have become insurmountable to who you were before you began.
+            Whether it was a full-stack social platform or a data visualizer, I have started every one of my projects with no idea what I was doing. If you can perservere through something insurmountable to you, then you have become insurmountable to who you were before you began.
           </p>
           <br/>
           <p className='text-[var(--brand-text)]'>
             In my free time you can usually find me lifting weights, rock climbing, or learning languages (I speak Spanish and German).
             I also love to travel, and am hoping to crack 30 visited countries before I graduate from Emory.
+          </p>
+          <br/>
+          <p className='text-[var(--brand-text)]'>
+            Thanks for checking out my website! Feel free to have a look around; you can sort by skills with the little bubbles.
           </p>
 
           <br/>
@@ -217,7 +224,7 @@ const App: React.FC = () => {
 
           </p>
         </section>
-        <section id="experience" ref={experienceRef} className="mb-10">
+        <section id="experience" ref={experienceRef} className="mb-10 scroll-mt-20">
           <h2 className="text-2xl font-semibold mb-4 text-[var(--brand-text)]">Experience</h2>
           {cardsData
             .filter(card => card.type === CardType.Experience)
@@ -226,7 +233,7 @@ const App: React.FC = () => {
             ))}
         </section>
 
-        <section id="projects" ref={projectsRef} className="mb-10">
+        <section id="projects" ref={projectsRef} className="mb-10 scroll-mt-20">
           <h2 className="text-2xl font-semibold mb-4 text-[var(--brand-text)]">Projects</h2>
           {cardsData
             .filter(card => card.type === CardType.Project)
@@ -236,7 +243,7 @@ const App: React.FC = () => {
             ))}
         </section>
 
-        <section id="involvement" ref={involvementRef} className="mb-10">
+        <section id="involvement" ref={involvementRef} className="mb-10 scroll-mt-20">
           <h2 className="text-2xl font-semibold mb-4 text-[var(--brand-text)]">Involvement</h2>
           {cardsData
             .filter(card => card.type === CardType.Involvement)
