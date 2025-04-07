@@ -38,6 +38,11 @@ const App: React.FC = () => {
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [activeSection, setActiveSection] = useState<string>('about');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  
+  // Animation states
+  const [showHeading, setShowHeading] = useState<boolean>(false);
+  const [showSubheading, setShowSubheading] = useState<boolean>(false);
+  const [showContent, setShowContent] = useState<boolean>(false);
 
   const handleSelectSkill = (skill: string) => {
     setSelectedSkills(prev =>
@@ -111,10 +116,28 @@ const App: React.FC = () => {
     };
   }, []);
   
+  // Fade-in animation sequence
+  useEffect(() => {
+    // First, show the heading
+    setTimeout(() => {
+      setShowHeading(true);
+    }, 300);
+    
+    // Then show the subheading
+    setTimeout(() => {
+      setShowSubheading(true);
+    }, 1000);
+    
+    // Finally show the rest of the content
+    setTimeout(() => {
+      setShowContent(true);
+    }, 1700);
+  }, []);
+  
   return (
     <div className="min-h-screen bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]">
       {/* Global Nav Bar - Desktop and Mobile */}
-      <nav className="fixed top-0 left-0 w-full bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] backdrop-blur-sm shadow-md z-20">
+      <nav className={`fixed top-0 left-0 w-full bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)] backdrop-blur-sm shadow-md z-20 transition-opacity duration-700 ease-in-out ${showContent ? 'opacity-100' : 'opacity-0'}`}>
         <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between md:justify-center relative">
           {/* Mobile hamburger menu */}
           <button 
@@ -192,9 +215,13 @@ const App: React.FC = () => {
       <div className="flex flex-col md:flex-row min-h-screen">
         {/* Left Col (Header Section) - Full width on mobile, fixed left on desktop */}
         <div className="md:fixed md:top-0 md:left-0 md:w-1/2 md:h-screen flex flex-col gap-2 justify-center items-center p-6 pt-24 md:pt-6 md:border-r">
-          <h1 className="text-2xl md:text-3xl font-bold text-[var(--brand-text)] text-center">Hey! I&rsquo;m Max Roberts.</h1>
-          <h3 className="text-base md:text-lg font-semibold mb-4 text-[var(--brand-text)] text-center">Welcome to my website :)</h3>
-          <div className="flex space-x-8 md:space-x-6">
+          <h1 className={`text-2xl md:text-3xl font-bold text-[var(--brand-text)] text-center transition-opacity duration-700 ease-in-out ${showHeading ? 'opacity-100' : 'opacity-0'}`}>
+            Hey! I&rsquo;m Max Roberts.
+          </h1>
+          <h3 className={`text-base md:text-lg font-semibold mb-4 text-[var(--brand-text)] text-center transition-opacity duration-700 ease-in-out ${showSubheading ? 'opacity-100' : 'opacity-0'}`}>
+            Welcome to my website :)
+          </h3>
+          <div className={`flex space-x-8 md:space-x-6 transition-opacity duration-700 ease-in-out ${showContent ? 'opacity-100' : 'opacity-0'}`}>
             {/* Email Icon */}
             <a href="mailto:maxroberts2003@gmail.com" className="hover:opacity-80">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 md:h-10 md:w-10 text-[var(--brand-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -220,7 +247,7 @@ const App: React.FC = () => {
               </svg>
             </a>
           </div>
-          <div className="mt-6">
+          <div className={`mt-6 transition-opacity duration-700 ease-in-out ${showContent ? 'opacity-100' : 'opacity-0'}`}>
             <button 
               onClick={handleResetFilters}
               className="px-8 md:px-16 py-2 rounded-full bg-[var(--brand-accent)] text-[var(--brand-text)] hover:opacity-90 transition delay-75 hover:cursor-pointer"  
@@ -231,7 +258,7 @@ const App: React.FC = () => {
         </div>
 
         {/* Right Col (Content Sections) - Full width on mobile, 50% width on desktop */}
-        <div className="w-full md:w-1/2 md:ml-[50%] p-4 md:p-6 pt-[280px] md:pt-24 overflow-y-auto min-h-screen scroll-smooth">
+        <div className={`w-full md:w-1/2 md:ml-[50%] p-4 md:p-6 pt-[280px] md:pt-24 overflow-y-auto min-h-screen scroll-smooth transition-opacity duration-700 ease-in-out ${showContent ? 'opacity-100' : 'opacity-0'}`}>
           {/* Content Sections */}
           <section id="about" ref={aboutRef} className="mb-10 scroll-mt-20">
             <h2 className="text-xl md:text-2xl font-semibold mb-2 text-[var(--brand-text)]">About Me</h2>
