@@ -297,7 +297,7 @@ const App: React.FC = () => {
         </div>
 
         {/* Right Col - Full width on mobile, 50% width on desktop */}
-        <div className={`w-full md:w-1/2 md:ml-[50%] p-4 md:p-6 pt-[280px] md:pt-24 overflow-y-auto min-h-screen scroll-smooth transition-opacity duration-700 ease-in-out ${showContent ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`w-full md:w-1/2 md:ml-[50%] p-4 md:p-6 pt-[100px] md:pt-24 overflow-y-auto min-h-screen scroll-smooth transition-opacity duration-700 ease-in-out ${showContent ? 'opacity-100' : 'opacity-0'}`}>
           {/* Content Sections */}
           <section id="about" ref={aboutRef} className="mb-10 scroll-mt-20">
             <h2 className="text-xl md:text-2xl font-semibold mb-2 text-[var(--brand-text)]">About Me</h2>
