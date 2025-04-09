@@ -90,13 +90,14 @@ const App: React.FC = () => {
   
     const observerOptions = {
       root: null,
-      threshold: 0.5, 
-      rootMargin: '-100px 0px -40% 0px' 
+      threshold: 0.1, 
+      rootMargin: '0px 0px -60% 0px' 
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
+          console.log("set active section", entry);
           setActiveSection(entry.target.id);
         }
       });
