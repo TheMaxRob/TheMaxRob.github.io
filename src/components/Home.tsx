@@ -35,14 +35,16 @@ interface CardData {
 }
 
 const App: React.FC = () => {
+  // Prevent flash by starting with everything hidden and only rendering when determined
+  const [pageReady, setPageReady] = useState<boolean>(false);
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [activeSection, setActiveSection] = useState<string>('about');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   
-  // Animation states - default to visible
-  const [showHeading, setShowHeading] = useState<boolean>(true);
-  const [showSubheading, setShowSubheading] = useState<boolean>(true);
-  const [showContent, setShowContent] = useState<boolean>(true);
+  // Animation states - default to invisible
+  const [showHeading, setShowHeading] = useState<boolean>(false);
+  const [showSubheading, setShowSubheading] = useState<boolean>(false);
+  const [showContent, setShowContent] = useState<boolean>(false);
   const [shouldAnimate, setShouldAnimate] = useState<boolean>(false);
 
   const handleSelectSkill = (skill: string) => {
@@ -118,20 +120,19 @@ const App: React.FC = () => {
     };
   }, []);
   
+  // Initialize animation logic without rendering the content yet
   useEffect(() => {
+    let shouldShowAnimation = false;
+    
     try {
       // Check hasVisited
       const hasVisitedBefore = localStorage.getItem('hasVisitedPortfolio');
       
       // If this is their first visit, or it's been more than a day since their last visit
       if (!hasVisitedBefore) {
-        // Set initial states to invisible
-        setShowHeading(false);
-        setShowSubheading(false);
-        setShowContent(false);
-        setShouldAnimate(true);
-        
+        shouldShowAnimation = true;
         localStorage.setItem('hasVisitedPortfolio', 'true');
+        localStorage.setItem('lastVisit', new Date().toISOString());
       } else {
         const lastVisit = localStorage.getItem('lastVisit');
         if (lastVisit) {
@@ -141,22 +142,32 @@ const App: React.FC = () => {
           
           // If it's been more than a day, show the animation again
           if (daysSinceLastVisit > 1) {
-            setShowHeading(false);
-            setShowSubheading(false);
-            setShowContent(false);
-            setShouldAnimate(true);
+            shouldShowAnimation = true;
             localStorage.setItem('lastVisit', currentDate.toISOString());
+          } else {
+            // No animation needed, show everything immediately
+            setShowHeading(true);
+            setShowSubheading(true);
+            setShowContent(true);
           }
         }
       }
     } catch (error) {
       console.warn('Could not access localStorage:', error);
+      // In case of error, show everything immediately
+      setShowHeading(true);
+      setShowSubheading(true);
+      setShowContent(true);
     }
+    
+    setShouldAnimate(shouldShowAnimation);
+    // Now that we've determined the initial states, we can render the page
+    setPageReady(true);
   }, []);
   
   // Fade-in animation sequence
   useEffect(() => {
-    if (shouldAnimate) {
+    if (shouldAnimate && pageReady) {
       // Heading
       setTimeout(() => {
         setShowHeading(true);
@@ -172,7 +183,16 @@ const App: React.FC = () => {
         setShowContent(true);
       }, 2000);
     }
-  }, [shouldAnimate]);
+  }, [shouldAnimate, pageReady]);
+  
+  // If page isn't ready yet, don't render anything or show a minimal loading state
+  if (!pageReady) {
+    return (
+      <div className="min-h-screen bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]">
+        {/* Optional: you could add a loading spinner here if needed */}
+      </div>
+    );
+  }
   
   return (
     <div className="min-h-screen bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-mid)] to-[var(--gradient-end)]">
@@ -254,7 +274,7 @@ const App: React.FC = () => {
       {/* Layout Container - Responsive grid */}
       <div className="flex flex-col md:flex-row min-h-screen">
         {/* Left Col (Header Section) - Full width on mobile, fixed left on desktop */}
-        <div className="md:fixed md:top-0 md:left-0 md:w-1/2 md:h-screen flex flex-col gap-2 justify-center items-center p-6 pt-24 md:pt-6 md:border-r">
+        <div className="md:fixed md:top-0 md:left-0 md:w-1/2 md:h-screen flex flex-col gap-2 justify-center items-center p-6 pt-24 md:pt-6">
           <h1 className={`text-2xl md:text-3xl font-bold text-[var(--brand-text)] text-center transition-opacity duration-700 ease-in-out ${showHeading ? 'opacity-100' : 'opacity-0'}`}>
             Hey! I&rsquo;m Max Roberts.
           </h1>
