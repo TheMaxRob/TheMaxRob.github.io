@@ -35,17 +35,15 @@ interface CardData {
 }
 
 const App: React.FC = () => {
-  // Prevent flash by starting with everything hidden and only rendering when determined
   const [pageReady, setPageReady] = useState<boolean>(false);
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [activeSection, setActiveSection] = useState<string>('about');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   
-  // Animation states - default to invisible
   const [showHeading, setShowHeading] = useState<boolean>(false);
   const [showSubheading, setShowSubheading] = useState<boolean>(false);
   const [showContent, setShowContent] = useState<boolean>(false);
-  const [shouldAnimate, setShouldAnimate] = useState<boolean>(false);
+  const [shouldAnimate, setShouldAnimate] = useState<boolean>(true); 
 
   const handleSelectSkill = (skill: string) => {
     setSelectedSkills(prev =>
@@ -120,48 +118,50 @@ const App: React.FC = () => {
     };
   }, []);
   
-  // Initialize animation logic without rendering the content yet
+  // Initialize animation logic
   useEffect(() => {
-    let shouldShowAnimation = false;
+    let runAnimation = true;
     
     try {
       // Check hasVisited
       const hasVisitedBefore = localStorage.getItem('hasVisitedPortfolio');
       
-      // If this is their first visit, or it's been more than a day since their last visit
-      if (!hasVisitedBefore) {
-        shouldShowAnimation = true;
-        localStorage.setItem('hasVisitedPortfolio', 'true');
-        localStorage.setItem('lastVisit', new Date().toISOString());
-      } else {
+      // If they've visited before, check when
+      if (hasVisitedBefore) {
         const lastVisit = localStorage.getItem('lastVisit');
         if (lastVisit) {
           const lastVisitDate = new Date(lastVisit);
           const currentDate = new Date();
           const daysSinceLastVisit = (currentDate.getTime() - lastVisitDate.getTime()) / (1000 * 3600 * 24);
           
-          // If it's been more than a day, show the animation again
-          if (daysSinceLastVisit > 1) {
-            shouldShowAnimation = true;
-            localStorage.setItem('lastVisit', currentDate.toISOString());
+          // If it's been less than a day, skip animation
+          if (daysSinceLastVisit <= 1) {
+            runAnimation = false;
           } else {
-            // No animation needed, show everything immediately
-            setShowHeading(true);
-            setShowSubheading(true);
-            setShowContent(true);
+            // Update last visit time
+            localStorage.setItem('lastVisit', currentDate.toISOString());
           }
         }
+      } else {
+        // First visit - set localStorage values
+        localStorage.setItem('hasVisitedPortfolio', 'true');
+        localStorage.setItem('lastVisit', new Date().toISOString());
       }
     } catch (error) {
       console.warn('Could not access localStorage:', error);
-      // In case of error, show everything immediately
+      // In case of error, we'll still run the animation but log the error
+    }
+    
+    setShouldAnimate(runAnimation);
+    
+    // If not animating, show everything immediately
+    if (!runAnimation) {
       setShowHeading(true);
       setShowSubheading(true);
       setShowContent(true);
     }
     
-    setShouldAnimate(shouldShowAnimation);
-    // Now that we've determined the initial states, we can render the page
+    // Now we can render the page
     setPageReady(true);
   }, []);
   
