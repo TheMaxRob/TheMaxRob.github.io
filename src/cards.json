@@ -54,8 +54,17 @@
   },
   {
     "id": 6,
+    "title": "Cox Automotive Inc",
+    "subtitle": "Software Engineer Intern",
+    "skills": ["React", "C#", "Terraform"],
+    "type": "Experience",
+    "startDate": "2025-5-19",
+    "endDate": "2025-8-08"
+  },
+  {
+    "id": 7,
     "title": "nCent Holdings",
-    "subtitle": "Full-stack Software Engineer Intern",
+    "subtitle": "Software Engineer Intern",
     "description": "Serving as a Full-Stack Engineer Intern, developing the nCent platform – a platform that allows users to make money monetizing their own personal data for targeted marketing purposes.",
     "skills": ["React", "Node.js", "Agile"],
     "type": "Experience",
@@ -63,7 +72,7 @@
     "endDate": "Present"
   },
   {
-    "id": 7,
+    "id": 8,
     "title": "Emory Computer Research Lab",
     "subtitle": "Undergraduate Researcher | Atlanta, GA",
     "description": "Conducting research on using simultaneous RFID Tag Readers to create a programmable ecosystem of IoT stickers that enable embedding internet capabilities into the environment, particularly in regards to DIY projects..",
@@ -73,7 +82,7 @@
     "endDate": "Present"
   },
   {
-    "id": 8,
+    "id": 9,
     "title": "Guardian Owl Digital",
     "subtitle": "Development Intern | Louisville, KY",
     "description": "Worked as a Development Intern managing blog content, optimizing SEO for Guardian Owl's Website, assisting with Google Analytics for clients, and creating a GPT model for advising clients on marketing strategies.",
@@ -83,7 +92,7 @@
     "endDate": "2024-08-01"
   },
   {
-    "id": 9,
+    "id": 10,
     "title": "Emory Impact Investing Group",
     "subtitle": "Senior Analyst",
     "link": "https://www.emoryimpactinvesting.com/",
@@ -94,7 +103,7 @@
     "endDate": "2024-09-01"
   },
   {
-    "id": 10,
+    "id": 11,
     "title": "Emory Rock Climbing Team",
     "subtitle": "Member",
     "skills": [],
@@ -103,7 +112,7 @@
     "endDate": "2024-12-01"
   },
   {
-    "id": 11,
+    "id": 12,
     "title": "Kappa Alpha Epsilon",
     "subtitle": "Philanthropy Chair",
     "skills": [],
