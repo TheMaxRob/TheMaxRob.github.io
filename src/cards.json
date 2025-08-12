@@ -56,7 +56,7 @@
     "id": 6,
     "title": "Cox Automotive Inc.",
     "subtitle": "Software Engineer Intern",
-    "skills": ["React", "C#", "Terraform"],
+    "skills": ["React", "C#", "Rally", "Splunk", "Agile", "Postman", "AWS", "Threat Analysis", "Integration Tests"],
     "type": "Experience",
     "startDate": "2025-5-19",
     "endDate": "2025-8-08"
