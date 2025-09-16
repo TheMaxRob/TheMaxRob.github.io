@@ -43,20 +43,19 @@
     "endDate": "2024-03-01"
   },
   {
-    "id": 5,
-    "title": "Raspberry Pi Friend Recognizer",
-    "link": "https://github.com/TheMaxRob/RpiFaceDetector",
-    "description": "An in-progress facial recognition system using C++ and OpenCV on a Raspberry Pi that I designed to differentiate my friends in real time with a Pi Camera. I've run into a snag with circumventing the Emory's enterprise network to allow my Pi to connect, so this project has been slow-going.",
-    "skills": ["C++", "OpenCV", "Raspberry Pi"],
-    "type": "Project",
-    "startDate": null,
-    "endDate": "Present"
+    "id": 13,
+    "title": "CodeMettle",
+    "subtitle": "Software Engineer Intern",
+    "startDate": "2025-9-02",
+    "type": "Experience",
+    "endDate": "Present",
+    "skills": ["Agile", "Typescript", "Java", "Fullstack"]
   },
   {
     "id": 6,
     "title": "Cox Automotive Inc.",
     "subtitle": "Software Engineer Intern",
-    "skills": ["React", "C#", "Rally", "Splunk", "Agile", "Postman", "AWS", "Threat Analysis", "Integration Tests"],
+    "skills": ["React", "C#", "Rally", "Splunk", "Agile", "Postman", "AWS", "Threat Analysis", "Integration Tests", "Backend"],
     "type": "Experience",
     "startDate": "2025-5-19",
     "endDate": "2025-8-08"
@@ -69,7 +68,7 @@
     "skills": ["React", "Node.js", "Agile"],
     "type": "Experience",
     "startDate": "2024-10-01",
-    "endDate": "Present"
+    "endDate": "2025-3-01"
   },
   {
     "id": 8,
@@ -79,7 +78,7 @@
     "skills": ["IoT", "Research", "Microcontrollers"],
     "type": "Experience",
     "startDate": "2024-09-01",
-    "endDate": "Present"
+    "endDate": "2025-04-01"
   },
   {
     "id": 9,
